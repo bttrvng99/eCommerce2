@@ -1,0 +1,7 @@
+{% autoescape off %}
+Hi {{ user.user_name }},
+
+Đã tạo tài khoản thành công!
+
+http://{{ domain }}{% url 'account:activate' uidb64=uid token=token %}
+{% endautoescape %}

@@ -1,0 +1,83 @@
+{% extends "./sub_base.html" %}
+{% load static %}
+{% block title %}Trả tiền{% endblock %}
+
+{% block sub_content %}
+
+<form id="payment-form">
+  <h3 class="mb-3">Địa chỉ nhận hàng</h3>
+  <!-- Error messages in this element -->
+  <div id="card-errors" class="a" role="alert"></div>
+  <div class="row g-3">
+    <div class="col-sm-7">
+      <label for="firstName" class="form-label">Tên khách hàng</label>
+      <input type="text" class="form-control" id="custName" placeholder="" required>
+      <div class="invalid-feedback">
+        Xin hãy điền tên
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="email" class="form-label">Email <span class="text-muted">(Không cần thiết)</span></label>
+      <input type="email" class="form-control" id="email" placeholder="you@example.com">
+      <div class="invalid-feedback">
+        Xin nhập địa chỉ e-mail.
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="address" class="form-label">Địa chỉ</label>
+      <input type="text" class="form-control" id="custAdd" placeholder="" required>
+      <div class="invalid-feedback">
+        Xin nhập địa chỉ giao hàng
+      </div>
+    </div>
+    <div class="col-12">
+      <label for="address2" class="form-label">Địa chỉ 2 <span class="text-muted">(Không cần thiết)</span></label>
+      <input type="text" class="form-control" id="custAdd2" placeholder="">
+    </div>
+    <div class="col-md-5">
+      <label for="country" class="form-label">Quốc gia</label>
+      <select class="form-select" id="country" required>
+        <option value="">Hãy chọn...</option>
+        <option>Việt Nam</option>
+      </select>
+      <div class="invalid-feedback">
+        Xin hãy chọn Quốc gia
+      </div>
+    </div>
+    <div class="col-md-4">
+      <label for="state" class="form-label">Thành phố</label>
+      <select class="form-select" id="state" required>
+        <option value="">Hãy chọn...</option>
+        <option>Hà Nội</option>
+        <option>TP. Hồ Chí Minh</option>
+      </select>
+      <div class="invalid-feedback">
+        Hãy chọn một thành phố!
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label for="Postcode" class="form-label">Mã bưu chính</label>
+      <input type="text" class="form-control" id="postCode" placeholder="" required>
+      <div class="invalid-feedback">
+        Hãy nhập mã bưu chính
+      </div>
+    </div>
+  </div>
+  <hr class="my-4">
+  <h4 class="mb-3">Hình thức trả tiền</h4>
+  <label for="card-element">Tín dụng hoặc ghi nợ</label>
+  <div id="card-element" class="form-control form-control-payment">
+    <!-- Payment elements will appear here -->
+  </div>
+  <hr class="my-4">
+  <button id="submit" class="btn btn-primary w-100 fw-bold" data-secret="{{ client_secret }}">Trả tiền</button>
+</form>
+
+<script>
+  var STRIPE_PUBLISHABLE_KEY = '{{STRIPE_PUBLISHABLE_KEY}}'
+  var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'payment/index.js' %}" data-rel-js></script>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "../sub_base.html" %}
+{% block title %}Sửa thông tin cá nhân{% endblock %}
+{% block sub_content %}
+
+<form class="account-form" method="post" enctype="multipart/form-data">
+    {% if user_form.is_valid and profile_form.is_valid  %}
+    <div class="alert alert-primary" role="alert">
+        Cập nhật thành công
+    </div>
+    <p class="small text-center pt-0">
+        <a href="{% url "account:dashboard" %}">Quay về bản tin</a>
+    </p>
+    {%else%}
+    <h3>Thay đổi thông tin</h3>
+    <p>Hãy điền vào bảng dưới đây:</p>
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-primary" role="alert">
+        Hãy thử lại!
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label class="small font-weight-bold">{{ user_form.email.label}}</label>
+    {{ user_form.email }}
+    <label class="small font-weight-bold">{{ user_form.first_name.label}}</label>
+    {{ user_form.first_name }}
+    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw-bold w-100" type="submit" value="Save changes">Lưu các thay đổi</button>
+    <hr class="mb-3">
+</form>
+<form class="account-form" action="{% url "account:delete_user" %}" method="post">
+    {% csrf_token %}
+    <p class=" h3 pt-4 font-weight-bold">Xóa tài khoản</p>
+    <p>Bạn có chắc là muốn xóa tài khoản không?</p>
+    <button type="submit" role="button" class="btn btn-danger btn-block py-2 mb-4 mt-5 fw-bold w-100">Xóa</button>
+</form>
+
+{% endblock %}

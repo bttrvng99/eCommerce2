@@ -1,0 +1,13 @@
+{% extends "./sub_base.html" %}
+{% block title %}Lỗi{% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="col-12 col-lg-6">
+    <h3 class="mb-4">Lỗi giao hàng</h3>
+    <p>Xin hãy gọi đội chăm sóc khách hàng</p>
+    <a href="{% url "account:dashboard" %}">Bảng tin</a>
+  </div>     
+</div>
+
+{% endblock %}
